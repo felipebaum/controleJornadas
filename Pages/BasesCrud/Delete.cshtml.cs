@@ -29,7 +29,7 @@ namespace controleJornadas.Pages.BasesCrud
                 return NotFound();
             }
 
-            var bases = await _context.Bases.FirstOrDefaultAsync(m => m.Idbase == id);
+            var bases = await _context.Bases.FirstOrDefaultAsync(m => m.Id == id);
 
             if (bases == null)
             {

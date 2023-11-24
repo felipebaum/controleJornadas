@@ -30,7 +30,7 @@ namespace controleJornadas.Pages.BasesCrud
                 return NotFound();
             }
 
-            var bases =  await _context.Bases.FirstOrDefaultAsync(m => m.Idbase == id);
+            var bases =  await _context.Bases.FirstOrDefaultAsync(m => m.Id == id);
             if (bases == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace controleJornadas.Pages.BasesCrud
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BasesExists(Bases.Idbase))
+                if (!BasesExists(Bases.Id))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace controleJornadas.Pages.BasesCrud
 
         private bool BasesExists(int id)
         {
-            return _context.Bases.Any(e => e.Idbase == id);
+            return _context.Bases.Any(e => e.Id == id);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace controleJornadas.Data
             : base(options)
         {
         }
-        public DbSet<controleJornadas.Models.Bases> Bases { get; set; } = default!;
+        public DbSet<Bases> Bases { get; set; } = default!;
+        public DbSet<Usuarios> Usuarios { get; set; } = default!;
     }
 }
