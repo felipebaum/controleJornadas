@@ -18,6 +18,7 @@ namespace controleJornadas.Models
 		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
 		[MaxLength(200)]
 		public string codPix { get; set; }
+		
 
 		public ICollection<funcionarios> Nome { get; set; }
 

@@ -11,8 +11,8 @@ using controleJornadas.Data;
 namespace controleJornadas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231124222640_InitialDatabase1")]
-    partial class InitialDatabase1
+    [Migration("20231124223535_InitialDat")]
+    partial class InitialDat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -252,9 +252,43 @@ namespace controleJornadas.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("funcionariosid")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("funcionariosid");
+
                     b.ToTable("Bases");
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.Jornadas", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HrFim")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HrInicio")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Turno")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Valor")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Jornadas");
                 });
 
             modelBuilder.Entity("controleJornadas.Models.Usuarios", b =>
@@ -278,6 +312,46 @@ namespace controleJornadas.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Jornadasid")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("cargo")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("codPix")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("dataAdmissao")
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("funcionariosid")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("nome")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Jornadasid");
+
+                    b.HasIndex("funcionariosid");
+
+                    b.ToTable("funcionarios");
                 });
 
             modelBuilder.Entity("BasesUsuarios", b =>
@@ -344,6 +418,36 @@ namespace controleJornadas.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.Bases", b =>
+                {
+                    b.HasOne("controleJornadas.Models.funcionarios", null)
+                        .WithMany("Bases")
+                        .HasForeignKey("funcionariosid");
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
+                {
+                    b.HasOne("controleJornadas.Models.Jornadas", null)
+                        .WithMany("Nome")
+                        .HasForeignKey("Jornadasid");
+
+                    b.HasOne("controleJornadas.Models.funcionarios", null)
+                        .WithMany("Nome")
+                        .HasForeignKey("funcionariosid");
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.Jornadas", b =>
+                {
+                    b.Navigation("Nome");
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
+                {
+                    b.Navigation("Bases");
+
+                    b.Navigation("Nome");
                 });
 #pragma warning restore 612, 618
         }
