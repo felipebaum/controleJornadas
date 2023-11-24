@@ -14,9 +14,6 @@ namespace controleJornadas.Models
         public string Cidade { get; set; }
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
         [MaxLength(5)]
-        public string Sigla
-        {
-            get; set;
-        }
+        public string Sigla { get; set; }
     }
 }
