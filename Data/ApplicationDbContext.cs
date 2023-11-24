@@ -12,5 +12,7 @@ namespace controleJornadas.Data
         }
         public DbSet<Bases> Bases { get; set; } = default!;
         public DbSet<Usuarios> Usuarios { get; set; } = default!;
+        public DbSet<controleJornadas.Models.funcionarios> funcionarios { get; set; } = default!;
+        public DbSet<controleJornadas.Models.Jornadas> Jornadas { get; set; } = default!;
     }
 }

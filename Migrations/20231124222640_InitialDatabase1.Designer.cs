@@ -11,8 +11,8 @@ using controleJornadas.Data;
 namespace controleJornadas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231124201823_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20231124222640_InitialDatabase1")]
+    partial class InitialDatabase1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -19,5 +19,8 @@ namespace controleJornadas.Models
 		[MaxLength(200)]
 		public string codPix { get; set; }
 
+		public ICollection<funcionarios> Nome { get; set; }
+
+
 	}
 }

@@ -1,0 +1,46 @@
+﻿@page
+@model controleJornadas.Pages.FuncionariosCrud.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>funcionarios</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.cargo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.cargo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.dataAdmissao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.dataAdmissao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.codPix)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.codPix)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="funcionarios.id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

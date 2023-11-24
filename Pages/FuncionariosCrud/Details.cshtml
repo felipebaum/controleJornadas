@@ -1,0 +1,43 @@
+﻿@page
+@model controleJornadas.Pages.FuncionariosCrud.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>funcionarios</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.cargo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.cargo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.dataAdmissao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.dataAdmissao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.funcionarios.codPix)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.funcionarios.codPix)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.funcionarios.id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
