@@ -4,23 +4,30 @@ namespace controleJornadas.Models
 {
     public class funcionarios
     {
+        private const string ErroPadrao = "O campo {0} é de preenchimento obrigatóio";
+
         public int id { get; set; }
-		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
-		[MaxLength(200)]
+
+        [Display(Name = "Nome Completo")]
+        [Required(ErrorMessage = ErroPadrao)]
+        [MaxLength(200)]
 		public string nome { get; set; }
-		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
-		[MaxLength(400)]
+
+        [Display(Name = "Cargo")]
+        [Required(ErrorMessage = ErroPadrao)]
+        [MaxLength(400)]
 		public string cargo { get; set; }
-		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
-		[MaxLength(200)]
-		public DateOnly dataAdmissao { get; set; }
-		
-		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
-		[MaxLength(200)]
+
+        [Display(Name = "Data de Admissão")]
+        [Required(ErrorMessage = ErroPadrao)]
+        public DateTime dataAdmissao { get; set; }
+
+        [Display(Name = "Chave Pix")]
+        [Required(ErrorMessage = ErroPadrao)]
+        [MaxLength(200)]
 		public string codPix { get; set; }
 
 		public int BasesId { get; set; }
-        public ICollection<Bases> Bases { get; set; }
 
 
     }

@@ -1,15 +1,29 @@
-﻿namespace controleJornadas.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace controleJornadas.Models
 {
     public class Jornadas
 
     {
-		public int id { get; set; }
-		public ICollection<funcionarios> Nome { get; set; }
-		public DateOnly Date { get; set; }
-		public string HrInicio { get; set; }
-		public string HrFim { get; set; }
-		public string Turno { get; set; }
-		public float Valor { get; set; }
+        private const string ErroPadrao = "O campo {0} é de preenchimento obrigatóio";
+
+        public int id { get; set; }
+
+        [Required(ErrorMessage = ErroPadrao)]
+        [Display(Name = "Data inicio da Jornada")]
+        public DateTime HrInicio { get; set; }
+
+        [Required(ErrorMessage = ErroPadrao)]
+        [Display(Name = "Data inicio da Jornada")]
+        public DateTime HrFim { get; set; }
+
+        [Required(ErrorMessage = ErroPadrao)]
+        [Display(Name = "Turno")]
+        public string Turno { get; set; }
+
+        [Display(Name = "Valor R$")]
+        [Required(ErrorMessage = ErroPadrao)]
+        public float Valor { get; set; }
 
 
 

@@ -12,8 +12,8 @@ using controleJornadas.Data;
 namespace controleJornadas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231127122050_initial")]
-    partial class initial
+    [Migration("20231201164516_dasdsakjh")]
+    partial class dasdsakjh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace controleJornadas.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("BasesUsuarios", b =>
-                {
-                    b.Property<int>("BasesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuariosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BasesId", "UsuariosId");
-
-                    b.HasIndex("UsuariosId");
-
-                    b.ToTable("BasesUsuarios");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -265,12 +250,12 @@ namespace controleJornadas.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.Property<int?>("funcionariosid")
+                    b.Property<int?>("UsuariosId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("funcionariosid");
+                    b.HasIndex("UsuariosId");
 
                     b.ToTable("Bases");
                 });
@@ -286,13 +271,11 @@ namespace controleJornadas.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-                    b.Property<string>("HrFim")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("HrFim")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("HrInicio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("HrInicio")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Turno")
                         .IsRequired()
@@ -339,6 +322,9 @@ namespace controleJornadas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int>("BasesId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Jornadasid")
                         .HasColumnType("int");
 
@@ -352,12 +338,8 @@ namespace controleJornadas.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<DateOnly>("dataAdmissao")
-                        .HasMaxLength(200)
-                        .HasColumnType("date");
-
-                    b.Property<int?>("funcionariosid")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("dataAdmissao")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("nome")
                         .IsRequired()
@@ -368,24 +350,7 @@ namespace controleJornadas.Migrations
 
                     b.HasIndex("Jornadasid");
 
-                    b.HasIndex("funcionariosid");
-
                     b.ToTable("funcionarios");
-                });
-
-            modelBuilder.Entity("BasesUsuarios", b =>
-                {
-                    b.HasOne("controleJornadas.Models.Bases", null)
-                        .WithMany()
-                        .HasForeignKey("BasesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("controleJornadas.Models.Usuarios", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -441,9 +406,9 @@ namespace controleJornadas.Migrations
 
             modelBuilder.Entity("controleJornadas.Models.Bases", b =>
                 {
-                    b.HasOne("controleJornadas.Models.funcionarios", null)
+                    b.HasOne("controleJornadas.Models.Usuarios", null)
                         .WithMany("Bases")
-                        .HasForeignKey("funcionariosid");
+                        .HasForeignKey("UsuariosId");
                 });
 
             modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
@@ -451,10 +416,6 @@ namespace controleJornadas.Migrations
                     b.HasOne("controleJornadas.Models.Jornadas", null)
                         .WithMany("Nome")
                         .HasForeignKey("Jornadasid");
-
-                    b.HasOne("controleJornadas.Models.funcionarios", null)
-                        .WithMany("Nome")
-                        .HasForeignKey("funcionariosid");
                 });
 
             modelBuilder.Entity("controleJornadas.Models.Jornadas", b =>
@@ -462,11 +423,9 @@ namespace controleJornadas.Migrations
                     b.Navigation("Nome");
                 });
 
-            modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
+            modelBuilder.Entity("controleJornadas.Models.Usuarios", b =>
                 {
                     b.Navigation("Bases");
-
-                    b.Navigation("Nome");
                 });
 #pragma warning restore 612, 618
         }
