@@ -29,6 +29,7 @@ namespace controleJornadas.Models
 
 		public int BasesId { get; set; }
 
+         public Bases Bases { get; set; }
 
     }
 }
