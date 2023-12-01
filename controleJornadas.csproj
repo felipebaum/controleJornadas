@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20231201164516_dasdsakjh.cs" />
+    <Compile Remove="Migrations\20231201164516_dasdsakjh.Designer.cs" />
+    <Compile Remove="Migrations\20231201164836_dasdsakjhaswsa.cs" />
+    <Compile Remove="Migrations\20231201164836_dasdsakjhaswsa.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
