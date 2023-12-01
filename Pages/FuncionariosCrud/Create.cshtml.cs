@@ -21,6 +21,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
 
         public IActionResult OnGet()
         {
+            ViewData["fodase"] = new SelectList(_context.Bases, "Id", "Sigla");
             return Page();
         }
 

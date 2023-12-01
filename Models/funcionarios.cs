@@ -14,14 +14,14 @@ namespace controleJornadas.Models
 		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
 		[MaxLength(200)]
 		public DateOnly dataAdmissao { get; set; }
-		public ICollection<Bases> Bases { get; set; }
+		
 		[Required(ErrorMessage = "O campo {0} é de preenchimento obrigatóio")]
 		[MaxLength(200)]
 		public string codPix { get; set; }
-		
 
-		public ICollection<funcionarios> Nome { get; set; }
+		public int BasesId { get; set; }
+        public ICollection<Bases> Bases { get; set; }
 
 
-	}
+    }
 }

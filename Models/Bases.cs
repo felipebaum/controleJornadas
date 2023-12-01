@@ -18,6 +18,5 @@ namespace controleJornadas.Models
         [MaxLength(5)]
         public string Sigla { get; set; }
 
-        public ICollection<Usuarios> Usuarios { get; set; }
     }
 }
