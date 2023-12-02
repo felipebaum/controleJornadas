@@ -43,18 +43,15 @@ namespace controleJornadas.Pages.FuncionariosCrud
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
-            _context.Attach(funcionarios).State = EntityState.Modified;
+
 
             try
             {
+            _context.funcionarios.Update(this.funcionarios);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
                 if (!funcionariosExists(funcionarios.id))
                 {

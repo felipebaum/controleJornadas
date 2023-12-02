@@ -27,9 +27,10 @@ namespace controleJornadas.Models
         [MaxLength(200)]
 		public string codPix { get; set; }
 
-		public int BasesId { get; set; }
+        [Display(Name = "Filial")]
+        public int BasesId { get; set; }
 
-         public Bases Bases { get; set; }
+        public Bases Bases { get; set; }
 
     }
 }

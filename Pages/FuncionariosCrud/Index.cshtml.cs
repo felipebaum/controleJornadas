@@ -17,7 +17,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
 
         public async Task OnGetAsync()
         {
-            funcionarios = await _context.funcionarios.Include(a =>a.Bases).ToListAsync();
+            this.funcionarios = await _context.funcionarios.Include(a =>a.Bases).ToListAsync();
         }
     }
 }
