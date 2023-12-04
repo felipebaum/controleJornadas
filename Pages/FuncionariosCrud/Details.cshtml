@@ -2,12 +2,12 @@
 @model controleJornadas.Pages.FuncionariosCrud.DetailsModel
 
 @{
-    ViewData["Title"] = "Detalhes";
+    ViewData["Title"] = "Detalhes do Funcionário";
 }
 
 
 <div>
-    <h4>Funcionarios</h4>
+    <h4>Funcionários</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.funcionarios.id">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.funcionarios.id">Alterar</a> |
     <a asp-page="./Index">Voltar</a>
 </div>
