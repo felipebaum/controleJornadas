@@ -31,10 +31,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        
 
             _context.funcionarios.Add(funcionarios);
             await _context.SaveChangesAsync();

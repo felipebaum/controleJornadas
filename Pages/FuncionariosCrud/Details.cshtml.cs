@@ -35,7 +35,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
             }
             else
             {
-                funcionarios = funcionarios;
+                this.funcionarios = funcionarios;
             }
             return Page();
         }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.FuncionariosCrud
 {
@@ -23,7 +17,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
 
         public async Task OnGetAsync()
         {
-            funcionarios = await _context.funcionarios.ToListAsync();
+            this.funcionarios = await _context.funcionarios.Include(a =>a.Bases).ToListAsync();
         }
     }
 }
