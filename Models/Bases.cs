@@ -4,10 +4,11 @@ namespace controleJornadas.Models
 {
     public class Bases
     {
-        private const string ErroPadrao = "O campo {0} é de preenchimento obrigatóio";
+        private const string ErroPadrao = "O campo {0} é de preenchimento obrigatório";
 
         [Key]
         public int Id { get; set; }
+
         [Required(ErrorMessage = ErroPadrao)]
         [MaxLength(100)]
         public string Nome { get; set; }
@@ -15,7 +16,7 @@ namespace controleJornadas.Models
         [MaxLength(200)]
         public string Cidade { get; set; }
         [Required(ErrorMessage = ErroPadrao)]
-        [MaxLength(5)]
+        [MaxLength(20)]
         public string Sigla { get; set; }
 
     }
