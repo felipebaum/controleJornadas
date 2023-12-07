@@ -13,7 +13,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
             _context = context;
         }
 
-        public IList<funcionarios> funcionarios { get;set; } = default!;
+        public IList<Funcionarios> funcionarios { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

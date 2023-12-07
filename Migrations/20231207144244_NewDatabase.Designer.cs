@@ -12,8 +12,8 @@ using controleJornadas.Data;
 namespace controleJornadas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231201164516_dasdsakjh")]
-    partial class dasdsakjh
+    [Migration("20231207144244_NewDatabase")]
+    partial class NewDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -247,74 +247,15 @@ namespace controleJornadas.Migrations
 
                     b.Property<string>("Sigla")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<int?>("UsuariosId")
-                        .HasColumnType("int");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuariosId");
 
                     b.ToTable("Bases");
                 });
 
-            modelBuilder.Entity("controleJornadas.Models.Jornadas", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime>("HrFim")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("HrInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Turno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Valor")
-                        .HasColumnType("real");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Jornadas");
-                });
-
-            modelBuilder.Entity("controleJornadas.Models.Usuarios", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
+            modelBuilder.Entity("controleJornadas.Models.Funcionarios", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -323,9 +264,6 @@ namespace controleJornadas.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<int>("BasesId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Jornadasid")
                         .HasColumnType("int");
 
                     b.Property<string>("cargo")
@@ -348,9 +286,35 @@ namespace controleJornadas.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("Jornadasid");
+                    b.HasIndex("BasesId");
 
                     b.ToTable("funcionarios");
+                });
+
+            modelBuilder.Entity("controleJornadas.Models.Jornadas", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("HrFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("HrInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Turno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Valor")
+                        .HasColumnType("real");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Jornadas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -404,27 +368,14 @@ namespace controleJornadas.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("controleJornadas.Models.Bases", b =>
+            modelBuilder.Entity("controleJornadas.Models.Funcionarios", b =>
                 {
-                    b.HasOne("controleJornadas.Models.Usuarios", null)
-                        .WithMany("Bases")
-                        .HasForeignKey("UsuariosId");
-                });
+                    b.HasOne("controleJornadas.Models.Bases", "Bases")
+                        .WithMany()
+                        .HasForeignKey("BasesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("controleJornadas.Models.funcionarios", b =>
-                {
-                    b.HasOne("controleJornadas.Models.Jornadas", null)
-                        .WithMany("Nome")
-                        .HasForeignKey("Jornadasid");
-                });
-
-            modelBuilder.Entity("controleJornadas.Models.Jornadas", b =>
-                {
-                    b.Navigation("Nome");
-                });
-
-            modelBuilder.Entity("controleJornadas.Models.Usuarios", b =>
-                {
                     b.Navigation("Bases");
                 });
 #pragma warning restore 612, 618

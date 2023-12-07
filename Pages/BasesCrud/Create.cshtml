@@ -4,11 +4,16 @@
 @{
     ViewData["Title"] = "Criar Filial";
 }
-@attribute [Authorize]
 
 
 <h4>Nova Filial</h4>
 <hr />
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensagem"]
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post">

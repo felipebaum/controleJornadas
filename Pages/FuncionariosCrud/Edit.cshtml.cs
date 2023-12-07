@@ -21,7 +21,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
         }
 
         [BindProperty]
-        public funcionarios funcionarios { get; set; } = default!;
+        public Funcionarios funcionarios { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -43,25 +43,29 @@ namespace controleJornadas.Pages.FuncionariosCrud
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-
-
-
+            if (!ModelState.IsValid)
+            {
+                TempData["Mensagem"] = "Erro ao salvar Funcionário";
+                return Page();
+            }
             try
             {
             _context.funcionarios.Update(this.funcionarios);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (!funcionariosExists(funcionarios.id))
                 {
-                    return NotFound();
+                    return Page();
+
                 }
                 else
                 {
                     throw;
                 }
             }
+            TempData["Mensagem"] = "Funcionário salvo com sucesso!";
 
             return RedirectToPage("./Index");
         }

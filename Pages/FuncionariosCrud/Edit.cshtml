@@ -8,6 +8,14 @@
 
 <h4>Funcionários</h4>
 <hr />
+<!-- Adicione esta seção para exibir mensagens -->
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensagem"]
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -35,6 +43,7 @@
             </div>
             <br>
             <div class="form-group">
+
                 <input type="submit" value="Salvar" class="btn btn-primary" /><a asp-page="./Index">Voltar</a>
             </div>
         </form>

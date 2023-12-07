@@ -19,7 +19,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
             _context = context;
         }
 
-        public funcionarios funcionarios { get; set; } = default!;
+        public Funcionarios funcionarios { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

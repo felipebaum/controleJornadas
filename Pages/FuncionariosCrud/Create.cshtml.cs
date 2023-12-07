@@ -26,7 +26,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
         }
 
         [BindProperty]
-        public funcionarios funcionarios { get; set; } = default!;
+        public Funcionarios funcionarios { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

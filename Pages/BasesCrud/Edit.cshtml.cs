@@ -45,10 +45,13 @@ namespace controleJornadas.Pages.BasesCrud
         {
             if (!ModelState.IsValid)
             {
+                
                 return Page();
+                
             }
 
             _context.Attach(Bases).State = EntityState.Modified;
+            
 
             try
             {
@@ -61,6 +64,7 @@ namespace controleJornadas.Pages.BasesCrud
                     return NotFound();
                 }
                 else
+
                 {
                     throw;
                 }
@@ -68,6 +72,7 @@ namespace controleJornadas.Pages.BasesCrud
 
             return RedirectToPage("./Index");
         }
+        
 
         private bool BasesExists(int id)
         {

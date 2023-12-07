@@ -21,6 +21,7 @@ namespace controleJornadas.Pages.BasesCrud
 
         public IActionResult OnGet()
         {
+
             return Page();
         }
 
@@ -32,13 +33,28 @@ namespace controleJornadas.Pages.BasesCrud
         {
             if (!ModelState.IsValid)
             {
+                TempData["Mensagem"] = "Linha 36Registro salvo com sucesso!";
+
                 return Page();
             }
 
-            _context.Bases.Add(Bases);
+            try
+            {
+                _context.Bases.Add(Bases);
+
+            }
+            catch (Exception)
+            {
+                TempData["Mensagem"] = "Linha 47Erro ao salvar no banco de dados!";
+            }
+            
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+
+
         }
+
     }
 }

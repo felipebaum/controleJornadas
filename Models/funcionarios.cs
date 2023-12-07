@@ -2,7 +2,7 @@
 
 namespace controleJornadas.Models
 {
-    public class funcionarios
+    public class Funcionarios
     {
         private const string ErroPadrao = "O campo {0} é de preenchimento obrigatóio";
 
