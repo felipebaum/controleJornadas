@@ -45,7 +45,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
         {
             if (!ModelState.IsValid)
             {
-                TempData["Mensagem"] = "Erro ao salvar Funcionário";
+                TempData["Mensagem"] = "Erro ao editar Funcionário, entre em contato com o suporte.";
                 return Page();
             }
             try
