@@ -1,5 +1,6 @@
 ﻿@page
 @model controleJornadas.Pages.BasesCrud.EditModel
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 @{
     ViewData["Title"] = "Alterar Filial";
@@ -11,7 +12,7 @@
 <!-- Adicione esta seção para exibir mensagens -->
 @if (TempData["Mensagem"] != null)
 {
-    <div class="alert alert-success">
+    <div class="alert alert-danger">
         @TempData["Mensagem"]
     </div>
 }

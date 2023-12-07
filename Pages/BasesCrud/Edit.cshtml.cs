@@ -45,7 +45,7 @@ namespace controleJornadas.Pages.BasesCrud
         {
             if (!ModelState.IsValid)
             {
-                
+                TempData["Mensagem"] = "Erro ao Filial, entre em contato com o suporte.";
                 return Page();
                 
             }

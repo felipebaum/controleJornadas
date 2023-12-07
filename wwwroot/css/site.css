@@ -58,13 +58,13 @@ body {
 
 /* Container styles */
 .container {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 /* Footer styles */
 .footer {
     background-color: #f8f9fa; /* Light gray background */
-    padding: 10px 0;
+    padding: 5px ;
     text-align: center;
     font-size: 0.8rem;
 }
