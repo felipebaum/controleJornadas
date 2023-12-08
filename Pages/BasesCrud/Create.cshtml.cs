@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using controleJornadas.Data;
+using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.BasesCrud
 {
