@@ -35,14 +35,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <form asp-controller="Logout" asp-action="Logout" method="post" id="logoutForm">
-                                @Html.AntiForgeryToken()
-                                <button type="submit">Logout</button>
+                            <form method="post" class="d-flex">
+                                <button type="submit" class="btn btn-danger text-white" asp-page-handler="Logout">Sair</button>
                             </form>
-
-
-
-                        
                         </li>
                     </ul>
                 </div>
