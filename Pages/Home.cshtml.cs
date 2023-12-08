@@ -25,7 +25,7 @@ namespace controleJornadas.Pages
             await _signInManager.SignOutAsync();
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
 
-            return RedirectToPage("/Index"); // Redirecionar para a página inicial ou outra página de sua escolha
+            return RedirectToPage("./Index"); // Redirecionar para a página inicial ou outra página de sua escolha
         }
     }
 }
