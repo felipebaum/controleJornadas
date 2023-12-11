@@ -39,7 +39,7 @@ namespace controleJornadas.Pages
 
         public async Task<IActionResult> OnPostAsync(string? id)
         {
-            var usuario = this.Usuarios.Where(x => x.Id == id).FirstOrDefault();
+            var usuario = this.Usuarios?.Where(x => x.Id == id).FirstOrDefault();
             if(usuario is null)
             {
                 //erro
