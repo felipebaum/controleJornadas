@@ -19,80 +19,42 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Pages.UsuariosModel)
+        @foreach (var user in Model.Usuarios)
         {
             <tr>
-                <td>@user.UserName</td>
+                <td>@user.Usuario</td>
                 <td>@user.Email</td>
-                <td>@(user.EmailConfirmed ? "Ativo" : "Inativo")</td>
+                <td>@(user.Ativo ? "Ativo" : "Inativo")</td>
                 <td>
-                    @if (!user.EmailConfirmed)
-                    {
-                        <button class="btn btn-success" onclick="approveUser('@user.Id')">Aprovar</button>
-                    }
-                    else
-                    {
-                        <button class="btn btn-danger" onclick="disapproveUser('@user.Id')">Reprovar</button>
-                    }
+                    <form method="post">
+                        <input type="hidden" asp-for="@user.Id" />
+                        @if (!user.Ativo)
+                        {
+                            <button class="btn btn-success" type="submit">Ativar</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" type="submit">Desativar</button>
+                        }
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+            <script>
+                function approveUser(userId) {
+                    var confirmation = confirm("Deseja realmente aprovar este usuário?");
+                    if (confirmation) {
+                        document.location = '/Usuarios?handler=Approve&userId=' + userId;
+                    }
+                }
 
-    public class IndexModel : PageModel
-    {
-        private readonly UserManager<IdentityUser> _userManager;
-
-        public IndexModel(UserManager<IdentityUser> userManager)
-        {
-            _userManager = userManager;
-        }
-
-        public List<IdentityUser> Users { get; set; }
-
-        public void OnGet()
-        {
-            Users = _userManager.Users.ToList();
-        }
-
-        public void OnPostApprove(string userId)
-        {
-            var user = _userManager.FindByIdAsync(userId).Result;
-            if (user != null)
-            {
-                user.EmailConfirmed = true;
-                _userManager.UpdateAsync(user);
-            }
-            RedirectToPage();
-        }
-
-        public void OnPostDisapprove(string userId)
-        {
-            var user = _userManager.FindByIdAsync(userId).Result;
-            if (user != null)
-            {
-                user.EmailConfirmed = false;
-                _userManager.UpdateAsync(user);
-            }
-            RedirectToPage();
-        }
-    }
-}
-
-<script>
-    function approveUser(userId) {
-        var confirmation = confirm("Deseja realmente aprovar este usuário?");
-        if (confirmation) {
-            document.location = '/Usuarios?handler=Approve&userId=' + userId;
-        }
-    }
-
-    function disapproveUser(userId) {
-        var confirmation = confirm("Deseja realmente reprovar este usuário?");
-        if (confirmation) {
-            document.location = '/Usuarios?handler=Disapprove&userId=' + userId;
-        }
-    }
-</script>
+                function disapproveUser(userId) {
+                    var confirmation = confirm("Deseja realmente reprovar este usuário?");
+                    if (confirmation) {
+                        document.location = '/Usuarios?handler=Disapprove&userId=' + userId;
+                    }
+                }
+            </script>
