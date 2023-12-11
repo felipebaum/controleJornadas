@@ -1,36 +1,40 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace controleJornadas.Models
 {
-    public class Funcionarios
+    [Table("Funcionario")]
+    public class Funcionario
     {
         private const string ErroPadrao = "O campo {0} é de preenchimento obrigatóio";
-
-        public int id { get; set; }
+        
+        [Key]
+        public int Id { get; set; }
 
         [Display(Name = "Nome Completo")]
         [Required(ErrorMessage = ErroPadrao)]
         [MaxLength(200)]
-		public string nome { get; set; }
+        public required string Nome { get; set; }
 
         [Display(Name = "Cargo")]
         [Required(ErrorMessage = ErroPadrao)]
         [MaxLength(400)]
-		public string cargo { get; set; }
+        public string? Cargo { get; set; }
 
         [Display(Name = "Data de Admissão")]
         [Required(ErrorMessage = ErroPadrao)]
-        public DateTime dataAdmissao { get; set; }
+        public required DateTime DataAdmissao { get; set; }
 
         [Display(Name = "Chave Pix")]
         [Required(ErrorMessage = ErroPadrao)]
         [MaxLength(200)]
-		public string codPix { get; set; }
+        public required string CodPix { get; set; }
+
+        public int BaseId { get; set; }
 
         [Display(Name = "Filial")]
-        public int BasesId { get; set; }
+        public Base? Base { get; set; }
 
-        public Bases Bases { get; set; }
-
+        public List<Jornada>? Jornada { get; set; }
     }
 }

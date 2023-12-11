@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace controleJornadas.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDatabase : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,34 +51,18 @@ namespace controleJornadas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bases",
+                name: "Base",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Cidade = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Cidade = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Sigla = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bases", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Jornadas",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    HrInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HrFim = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Turno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Valor = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Jornadas", x => x.id);
+                    table.PrimaryKey("PK_Base", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,24 +172,47 @@ namespace controleJornadas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "funcionarios",
+                name: "Funcionario",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    cargo = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false),
-                    dataAdmissao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    codPix = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    BasesId = table.Column<int>(type: "int", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Cargo = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false),
+                    DataAdmissao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CodPix = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    BaseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_funcionarios", x => x.id);
+                    table.PrimaryKey("PK_Funcionario", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_funcionarios_Bases_BasesId",
-                        column: x => x.BasesId,
-                        principalTable: "Bases",
+                        name: "FK_Funcionario_Base_BaseId",
+                        column: x => x.BaseId,
+                        principalTable: "Base",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Jornada",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HrInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    HrFim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Turno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FuncionarioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jornada", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Jornada_Funcionario_FuncionarioId",
+                        column: x => x.FuncionarioId,
+                        principalTable: "Funcionario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -250,9 +257,20 @@ namespace controleJornadas.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_funcionarios_BasesId",
-                table: "funcionarios",
-                column: "BasesId");
+                name: "IX_Base_Sigla",
+                table: "Base",
+                column: "Sigla",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Funcionario_BaseId",
+                table: "Funcionario",
+                column: "BaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Jornada_FuncionarioId",
+                table: "Jornada",
+                column: "FuncionarioId");
         }
 
         /// <inheritdoc />
@@ -274,10 +292,7 @@ namespace controleJornadas.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "funcionarios");
-
-            migrationBuilder.DropTable(
-                name: "Jornadas");
+                name: "Jornada");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -286,7 +301,10 @@ namespace controleJornadas.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Bases");
+                name: "Funcionario");
+
+            migrationBuilder.DropTable(
+                name: "Base");
         }
     }
 }
