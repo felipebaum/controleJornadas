@@ -1,0 +1,59 @@
+﻿@page
+@model controleJornadas.Pages.UsuariosModel
+
+@{
+    ViewData["Title"] = "Usuarios";
+    Layout = "_Layout";
+}
+
+<h1>Lista de Usuários</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Usuarios)
+        {
+            <tr>
+                <td>@user.Usuario</td>
+                <td>@user.Email</td>
+                <td>@(user.Ativo ? "Ativo" : "Inativo")</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" asp-for="@user.Id" />
+                        @if (!user.Ativo)
+                        {
+                            <button class="btn btn-success" type="submit" asp-route-id="@user.Id">Ativar</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" type="submit" asp-route-id="@user.Id">Desativar</button>
+                        }
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+            <script>
+                function approveUser(userId) {
+                    var confirmation = confirm("Deseja realmente aprovar este usuário?");
+                    if (confirmation) {
+                        document.location = '/Usuarios?handler=Approve&userId=' + userId;
+                    }
+                }
+
+                function disapproveUser(userId) {
+                    var confirmation = confirm("Deseja realmente reprovar este usuário?");
+                    if (confirmation) {
+                        document.location = '/Usuarios?handler=Disapprove&userId=' + userId;
+                    }
+                }
+            </script>
