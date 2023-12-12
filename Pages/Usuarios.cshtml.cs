@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace controleJornadas.Pages
 {
@@ -39,15 +40,11 @@ namespace controleJornadas.Pages
 
         public async Task<IActionResult> OnPostAsync(string? id)
         {
-            var usuario = this.Usuarios?.Where(x => x.Id == id).FirstOrDefault();
-            if(usuario is null)
-            {
-                //erro
-            }
-            await this.applicationDbContext.Usuarios.ExecuteUpdateAsync(p => p.SetProperty(x => x.EmailConfirmed, !usuario.Ativo));
+            var usuario2 = this.UserManager.Users.First(x => x.Id == id);
+            usuario2.EmailConfirmed = !usuario2.EmailConfirmed;
             await this.applicationDbContext.SaveChangesAsync();
-
-            return Page();
+            
+            return RedirectToPage("./usuarios");
         }
     }
 }

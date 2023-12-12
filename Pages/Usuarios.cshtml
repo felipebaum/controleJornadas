@@ -29,11 +29,11 @@
                         <input type="hidden" asp-for="@user.Id" />
                         @if (!user.Ativo)
                         {
-                            <button class="btn btn-success" type="submit">Ativar</button>
+                            <button class="btn btn-success" type="submit" asp-route-id="@user.Id">Ativar</button>
                         }
                         else
                         {
-                            <button class="btn btn-success" type="submit">Desativar</button>
+                            <button class="btn btn-success" type="submit" asp-route-id="@user.Id">Desativar</button>
                         }
                     </form>
                 </td>
